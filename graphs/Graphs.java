@@ -5,18 +5,18 @@ import java.util.*;
 public class Graphs {
 
 
-	private static <T1> void depthFirstSearch(ListGraph<T1> graph, T1 fromNode, Set<T1> besökta){
-		besökta.add(fromNode);
+	private static <T1> void depthFirstSearch(ListGraph<T1> graph, T1 fromNode, Set<T1> visited){
+		visited.add(fromNode);
 		for(Edge<T1> e : graph.getEdgesFrom(fromNode))
-			if (!besökta.contains(e.getDest()))
-				depthFirstSearch(graph, e.getDest(), besökta);
+			if (!visited.contains(e.getDest()))
+				depthFirstSearch(graph, e.getDest(), visited);
 	}
 
 
 	public static <T1> boolean pathExists(ListGraph<T1> graph, T1 fromNode, T1 to){
-		Set<T1> besökta = new HashSet<T1>();
-		depthFirstSearch(graph, fromNode, besökta);
-		return besökta.contains(to);
+		Set<T1> visited = new HashSet<T1>();
+		depthFirstSearch(graph, fromNode, visited);
+		return visited.contains(to);
 	}
 
 
